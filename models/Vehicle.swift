@@ -23,5 +23,14 @@ class Vehicle: finishDelivery {
   func finish() {
       fatalError("Implemente o método finish")
   }
-}
 
+  func prepareToDelivery() { 
+   if inRoute { 
+      print("A viagem já está em andamento.")
+      return
+   } else {
+    self.inRoute = true
+    print("Viagem iniciada!")
+   }
+  }
+}

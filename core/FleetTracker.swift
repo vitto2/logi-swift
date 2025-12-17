@@ -1,17 +1,17 @@
 class FleetTracker { 
 
-  private let totalEntregas: Int
-  private let combustivelGastoTotal: Double
+  private let totalDelivery: Int
+  private let spentFuelTotal: Double
 
   let shared = FleetTracker()
   
   private init() {}
 
-  func registrarEntrega(distancia: Double, consumo: Double) { 
-    totalEntregas += 1
+  func registrarEntrega(distance: Double, consumption: Double) { 
+    totalDelivery += 1
 
-    let combustivelDestaEntrega = distancia / consumo
-    combustivelGastoTotal += combustivelDestaEntrega
+    let fuelDelivery = distance / consumption
+    spentFuelTotal += fuelDelivery
 
     print("Entrega registrada! Total acumulado: \(totalEntregas) entregas e \(combustivelGastoTotal)L de combustível.")
     }

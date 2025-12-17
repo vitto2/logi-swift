@@ -8,13 +8,13 @@ class FleetTracker {
   private init() {}
 
   func registerDelivery(distance: Double, consumption: Double) { 
-    totalDelivery += 1
+    totalDelivery += 1 //Soma 1 ao total de entregas feitas
 
-    let fuelDelivery = distance / consumption
-    spentFuelTotal += fuelDelivery
+    let fuelDelivery = distance / consumption // calcula o consumo médio de combustível
+    
+    spentFuelTotal += fuelDelivery //Soma ao total de combustível a quantidade média de combustivel da entrega
 
     print("Entrega registrada! Total acumulado: \(totalDelivery) entregas e \(spentFuelTotal)L de combustível.")
     }
   }
 
-FleetTracker.shared.registerDelivery(distance: 10.5, consumption: 17.0)

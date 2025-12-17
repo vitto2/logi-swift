@@ -1,13 +1,12 @@
 class FleetTracker { 
 
-  private var totalDelivery: Int = 0 //Propriedade que acumula o total de entregas feitas
-  private var spentFuelTotal: Double = 0.0 //Propriedade que acumula o total de combustível gasto
+  private var totalDelivery: Int = 0 
+  private var spentFuelTotal: Double = 0.0 
 
-  static let shared = FleetTracker() // Instancia única compartilhada por todo sistema
+  static let shared = FleetTracker() 
   
-  private init() {} // inicializador privado que impedirá que outras instancias sejam criadas 
+  private init() {} 
 
-  //método responsável por atualizar as métricas globais das entregas
   func registerDelivery(distance: Double, consumption: Double) { 
     totalDelivery += 1
     spentFuelTotal += consumption
@@ -15,3 +14,5 @@ class FleetTracker {
     }
   }
 
+
+FleetTracker.shared.registerDelivery(distance: 10.0, consumption: 25.0)

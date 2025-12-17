@@ -20,7 +20,6 @@ class Vehicle: finishDelivery {
     print("ID: \(self.id) | Load capacity: \(self.loadCapacity) | inRoute: \(self.inRoute)")
   }
 
-
   func finish() {
       fatalError("Implemente o método finish")
   }

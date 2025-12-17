@@ -13,13 +13,19 @@ class Vehicle {
   }
   
 
-  func prepareForTravel() { 
+  func prepareForDelivery() { 
 
-    guard inRoute else { 
+    guard let inRoute else { 
       print("O veículo ainda não está em rota. ")
       return
     }
 
     print("O veículo está em rota.")
+  }
+
+  func finishDelivery(distanceDelivery: Double, ) {
+      self.inRoute = false; 
+
+      FleetTracker.shared.registrarEntrega(distance: distanceDelivery, consumo: calculado)
   }
 }

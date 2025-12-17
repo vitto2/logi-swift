@@ -23,9 +23,7 @@ class Vehicle {
     print("O veículo está em rota.")
   }
 
-  func finishDelivery(distanceDelivery: Double, ) {
-      self.inRoute = false; 
-
-      FleetTracker.shared.registrarEntrega(distance: distanceDelivery, consumo: calculado)
+  protocol finishDelivery {
+      func finish()
   }
 }

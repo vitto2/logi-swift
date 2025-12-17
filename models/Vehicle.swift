@@ -2,7 +2,7 @@ protocol finishDelivery {
   func finish() 
 }
 
-class Vehicle { 
+class Vehicle: finishDelivery { 
 
   private let id: String 
   private let loadCapacity: Double 
@@ -18,6 +18,11 @@ class Vehicle {
 
   func showInfos() { 
     print("ID: \(self.id) | Load capacity: \(self.loadCapacity) | inRoute: \(self.inRoute)")
+  }
+
+
+  func finish() {
+      fatalError("Implemente o método finish")
   }
 }
 

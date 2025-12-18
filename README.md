@@ -1,65 +1,71 @@
 # 🚀 LogiSwift - Fleet Management System
 
-**LogiSwift** é um motor de backend para gestão logística, desenvolvido para demonstrar o domínio de conceitos avançados de Programação Orientada a Objetos (POO) em Swift. O sistema gerencia uma frota de veículos, controla estados de disponibilidade e centraliza métricas globais de operação.
+**LogiSwift** é um motor de backend para gestão logística, desenvolvido para demonstrar o domínio de conceitos avançados de Programação Orientada a Objetos (POO) em Swift. O sistema gerencia uma frota de veículos, controla estados de disponibilidade e centraliza métricas globais de operação através de um Singleton.
 
 ## 🎯 Objetivos do Projeto
 
-Este projeto foi construído para simular um desafio técnico real, focando em:
+Este projeto simula um desafio técnico real, com foco em:
 
-* **Encapsulamento:** Proteção de estados internos e exposição controlada de dados.
-* **Herança e Polimorfismo:** Especialização de veículos (Motos e Caminhões) com comportamentos distintos.
-* **Design Patterns:** Implementação do padrão **Singleton** para centralização de métricas.
-* **Programação Defensiva:** Validação de estados com `guard` e tratamentos de erro.
+* **Encapsulamento:** Uso de modificadores de acesso para proteger o estado interno (ex: `private(set)`).
+* **Herança e Polimorfismo:** Implementação de uma classe base `Vehicle` com especializações em `Truck` e `Motorcycle`, cada uma com lógicas de consumo distintas.
+* **Design Patterns:** Implementação do padrão **Singleton** no `FleetTracker` para garantir uma fonte única de verdade para métricas da frota.
+* **Programação Defensiva:** Validação de estados com `guard` para impedir operações inválidas (ex: iniciar rota em veículo já ocupado).
 
 ## 🛠️ Tecnologias e Conceitos Utilizados
 
-* **Linguagem:** Swift
-* **Singletons:** Garantia de uma única instância para o `FleetTracker`.
-* **Computed Properties:** Lógicas dinâmicas para status de veículos.
-* **Override & Super:** Extensão de funcionalidades da classe base nas subclasses.
-* **Randomização:** Geração de códigos identificadores únicos.
+* **Linguagem:** Swift.
+* **Protocolos:** Definição de contratos de interface com o protocolo `finishDelivery`.
+* **Sobrescrita (Override):** Especialização de métodos da classe base para cálculos específicos de consumo de combustível.
+* **Randomização:** Geração automática de identificadores únicos (IDs) para os veículos durante a inicialização.
 
 ## 🏗️ Arquitetura do Sistema
 
-O projeto segue uma estrutura organizada para facilitar a escalabilidade:
+O projeto utiliza a estrutura do Swift Package Manager organizada para escalabilidade:
 
 ```text
 LogiSwift/
-├── Core/
-│   └── FleetTracker.swift    # Singleton: Gerencia métricas globais (km, combustível).
-├── Models/
-│   ├── Veiculo.swift         # Classe Base: Define o contrato e estado comum.
-│   ├── Caminhao.swift        # Subclasse: Lógica de consumo para carga pesada.
-│   └── Moto.swift            # Subclasse: Lógica de consumo para entregas rápidas.
-└── main.swift                # Sandbox: Execução e simulação de casos de uso.
+├── Sources/
+│   ├── Core/
+│   │   └── FleetTracker.swift    # Singleton: Acumula métricas globais de combustível e entregas.
+│   └── Models/
+│       ├── Vehicle.swift         # Base: Define ID, capacidade e controle de status (inRoute).
+│       ├── Truck.swift           # Subclasse: Aplica fator de consumo para carga pesada (2.0L/km).
+│       └── Motorcycle.swift      # Subclasse: Aplica fator de consumo para entregas rápidas (0.5L/km).
+└── main.swift                    # Sandbox: Execução e simulação de casos de uso.
 
 ```
 
 ## 🚀 Como Executar
 
-1. Clone este repositório:
+1. **Clone este repositório:**
 ```bash
-git clone https://github.com/SEU_USUARIO/logiswift.git
+git clone https://github.com/vitto2/logi-swift.git
 
 ```
 
 
-2. Abra o arquivo no **Xcode** ou execute via terminal utilizando `swift main.swift`.
+2. **Execução:**
+Abra a pasta no terminal e utilize o comando:
+```bash
+swift run
+
+```
+
+
 
 ## 📈 Exemplo de Fluxo
 
-O sistema impede que um veículo inicie uma rota se já estiver ocupado e calcula automaticamente o combustível gasto com base na eficiência de cada modelo ao finalizar uma entrega:
+O sistema valida o estado do veículo e atualiza o rastreador central automaticamente:
 
 ```swift
-let caminhao = Caminhao(identificador: "TRUCK-01", capacidade: 1000.0)
-caminhao.prepararParaViagem() // ✅ Sucesso
-caminhao.prepararParaViagem() // ⚠️ Erro: Veículo já em rota.
+let truck = Truck(axes: 3, loadCapacity: 5000.0)
+truck.prepareForDelivery() // ✅ Sucesso: Veículo entra em rota.
+truck.prepareForDelivery() // ⚠️ Validação: Impede nova rota se inRoute for true.
 
-caminhao.finalizarEntrega(distancia: 100.0) // Registra 200L no FleetTracker
+truck.finish(distanceDelivery: 100.0) // ⛽ Calcula consumo e registra no FleetTracker.
 
 ```
 
 ---
 
-⭐ *Este projeto faz parte do meu portfólio de estudos avançados em desenvolvimento iOS.*
-
+⭐ *Este projeto faz parte do meu portfólio de estudos avançados em desenvolvimento iOS e arquitetura de software.*
